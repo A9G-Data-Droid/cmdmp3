@@ -24,11 +24,11 @@ int PlaySoundFile(char *fullPath) {
     sendCommand("Close All");
 
     // Dynamically allocate the size cmdBuff based on the true size, instead of guessing
-    int bufferSize = snprintf(NULL, 0, "Open %s Type MPEGVideo Alias theMP3", fullPath) + 1;
-    char * cmdBuff = malloc(bufferSize);
-    snprintf(cmdBuff, bufferSize, "Open %s Type MPEGVideo Alias theMP3", fullPath);
+    int bufferSize = snprintf(NULL, 0, "Open %s Type MPEGVideo Alias theMP3", shortBuffer) + 1;
+    char * cmdBuff = (char*)malloc(bufferSize);
+    snprintf(cmdBuff, bufferSize, "Open %s Type MPEGVideo Alias theMP3", shortBuffer);
     sendCommand(cmdBuff);
-
+    free(cmdBuff);
     sendCommand("Play theMP3 Wait");
     return 0;
 }
